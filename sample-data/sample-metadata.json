@@ -1,0 +1,18 @@
+[
+  {
+    "originalName": "college-notes.pdf",
+    "mimeType": "application/pdf",
+    "size": 124500,
+    "cloudinaryUrl": "https://res.cloudinary.com/demo/raw/upload/v123456789/serverless-file-processor/pdfs/college-notes.pdf",
+    "processingType": "pdf-text-extracted",
+    "uploadedAt": "2026-04-25T10:30:00.000Z"
+  },
+  {
+    "originalName": "lab-photo.jpg",
+    "mimeType": "image/jpeg",
+    "size": 348800,
+    "cloudinaryUrl": "https://res.cloudinary.com/demo/image/upload/v123456789/serverless-file-processor/images/lab-photo.jpg",
+    "processingType": "image-compressed",
+    "uploadedAt": "2026-04-25T10:40:00.000Z"
+  }
+]
