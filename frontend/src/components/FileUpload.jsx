@@ -5,7 +5,7 @@ import { uploadFile } from '../services/api';
 const MAX_SIZE = 5 * 1024 * 1024;
 const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
 
-function FileUpload({ onUploadSuccess }) {
+function FileUpload({ token, user, onUploadSuccess }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
@@ -47,7 +47,7 @@ function FileUpload({ onUploadSuccess }) {
       setUploadProgress(0);
       setError('');
 
-      await uploadFile(selectedFile, (event) => {
+      await uploadFile(selectedFile, token, (event) => {
         if (event.total) {
           const percent = Math.round((event.loaded * 100) / event.total);
           setUploadProgress(percent);
@@ -100,6 +100,9 @@ function FileUpload({ onUploadSuccess }) {
         {isUploading ? 'Uploading...' : 'Upload'}
       </button>
 
+      <p className="upload-note">
+        Files uploaded from this form are saved only under <strong>{user.name}</strong>.
+      </p>
       {isUploading && (
         <div className="progress-wrapper">
           <div className="progress-bar" style={{ width: `${uploadProgress}%` }} />

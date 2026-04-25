@@ -21,6 +21,8 @@ const uploadAndProcessFile = async (req, res, next) => {
     }
 
     const savedFile = await File.create({
+      userId: req.user.id,
+      userName: req.user.name,
       originalName: req.file.originalname,
       mimeType: req.file.mimetype,
       size: req.file.size,
@@ -38,7 +40,7 @@ const uploadAndProcessFile = async (req, res, next) => {
 
 const getAllFiles = async (req, res, next) => {
   try {
-    const files = await File.find().sort({ createdAt: -1 });
+    const files = await File.find({ userId: req.user.id }).sort({ createdAt: -1 });
     res.status(200).json(files);
   } catch (error) {
     next(error);
@@ -47,11 +49,14 @@ const getAllFiles = async (req, res, next) => {
 
 const deleteFile = async (req, res, next) => {
   try {
-    const file = await File.findById(req.params.id);
+    const file = await File.findOne({
+      _id: req.params.id,
+      userId: req.user.id
+    });
 
     if (!file) {
       res.status(404);
-      throw new Error('File not found.');
+      throw new Error('File not found for this user.');
     }
 
     const resourceType = file.mimeType === 'application/pdf' ? 'raw' : 'image';

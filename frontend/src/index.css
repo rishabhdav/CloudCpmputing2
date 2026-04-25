@@ -234,6 +234,55 @@ select {
   background: rgba(255, 255, 255, 0.045);
 }
 
+.content-main {
+  display: grid;
+  gap: 24px;
+}
+
+.user-form {
+  display: grid;
+  gap: 16px;
+}
+
+.auth-switch,
+.session-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.user-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.user-form span {
+  color: #d5e1e4;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.user-form input {
+  width: 100%;
+  border: 1px solid rgba(201, 217, 223, 0.2);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff6e8;
+}
+
+.user-form input::placeholder {
+  color: #799097;
+}
+
+.user-form input:focus {
+  outline: 1px solid rgba(104, 201, 226, 0.72);
+  border-color: rgba(104, 201, 226, 0.72);
+}
+
 .selected-label {
   display: block;
   margin-bottom: 4px;
@@ -255,12 +304,14 @@ select {
 }
 
 .primary-button,
+.secondary-button,
 .file-actions button,
 .file-actions a {
   transition: transform 160ms ease, opacity 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
 .primary-button,
+.secondary-button,
 .file-actions button {
   border: none;
   cursor: pointer;
@@ -284,6 +335,20 @@ select {
 .primary-button:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+}
+
+.secondary-button {
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #eff5f6;
+}
+
+.secondary-button.active {
+  background: rgba(92, 181, 209, 0.14);
+  border-color: rgba(92, 181, 209, 0.22);
+  color: #bde8f2;
 }
 
 .progress-wrapper {
@@ -490,7 +555,9 @@ pre {
   .section-heading,
   .selected-file,
   .file-item-top,
-  .file-actions {
+  .file-actions,
+  .auth-switch,
+  .session-actions {
     flex-direction: column;
     align-items: stretch;
   }

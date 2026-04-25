@@ -18,7 +18,8 @@ A beginner-friendly full-stack project for college/viva.
    - Image -> compressed/resized with Sharp.
    - PDF -> basic text extraction with pdf-parse.
 4. Save metadata in MongoDB Atlas.
-5. Display uploaded files in frontend list.
+5. User signup and login.
+6. Display uploaded files in frontend list.
 6. View/Download files using cloud URL.
 7. Validation for type and max size (5 MB).
 8. Bonus included:
@@ -67,6 +68,7 @@ Create `backend/.env` from `backend/.env.example`:
 ```env
 PORT=5000
 NODE_ENV=development
+AUTH_TOKEN_SECRET=replace_with_a_long_random_secret
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/fileProcessor?retryWrites=true&w=majority
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
@@ -104,14 +106,34 @@ Open the shown localhost URL in browser.
 ### Health check
 - `GET /api/health`
 
+### Signup
+- `POST /api/auth/signup`
+- JSON body: `name`, `email`, `password`
+
+### Login
+- `POST /api/auth/login`
+- JSON body: `email`, `password`
+
+### Current user
+- `GET /api/auth/me`
+- Header: `Authorization: Bearer <token>`
+
 ### Upload + process file
 - `POST /api/files/upload`
 - Form-data key: `file`
 - Accepted mime types: `image/jpeg`, `image/png`, `image/webp`, `application/pdf`
 - Max file size: 5 MB
+- Header: `Authorization: Bearer <token>`
 
 ### List files
 - `GET /api/files`
+- Header: `Authorization: Bearer <token>`
+
+## User-specific behavior
+- Users create an account with name, email, and password.
+- Login returns a token stored in browser `localStorage`.
+- Protected file routes only return or delete files belonging to the logged-in user.
+- Images and PDFs uploaded by one account are not shown to other accounts.
 
 ---
 

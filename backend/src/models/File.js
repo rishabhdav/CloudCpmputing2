@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 
 const fileSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+      index: true
+    },
+    userName: {
+      type: String,
+      required: true,
+      trim: true
+    },
     originalName: {
       type: String,
       required: true

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { deleteFile } from '../services/api';
 
-function FileList({ files, onDeleteSuccess }) {
+function FileList({ token, user, files, onDeleteSuccess }) {
   const safeFiles = Array.isArray(files) ? files : [];
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const [deletingId, setDeletingId] = useState('');
@@ -53,7 +53,7 @@ function FileList({ files, onDeleteSuccess }) {
 
     try {
       setDeletingId(file._id);
-      await deleteFile(file._id);
+      await deleteFile(file._id, token);
       await onDeleteSuccess?.();
     } catch (error) {
       window.alert(error.response?.data?.message || error.message || 'Delete failed.');
@@ -67,7 +67,7 @@ function FileList({ files, onDeleteSuccess }) {
       <div className="section-heading">
         <div>
           <p className="section-kicker">Library</p>
-          <h2>Uploaded files</h2>
+          <h2>{user.name}&apos;s uploaded files</h2>
         </div>
         <span className="section-chip">{safeFiles.length} items</span>
       </div>
